@@ -1,0 +1,54 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Jarvis Settings</title>
+<style>
+body{font-family:"Google Sans","Segoe UI",system-ui,sans-serif;background:radial-gradient(120% 80% at 50% 0,#0b1a22,#03080b);color:#e6f4f8;margin:0;min-height:100vh}
+.wrap{max-width:740px;margin:0 auto;padding:36px 20px 90px}
+h1{font-weight:300;font-size:34px;margin:0 0 22px} h1 b{font-weight:600;color:#4fd8ff}
+section{background:rgba(8,24,30,.7);border:1px solid rgba(80,190,220,.2);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+h2{margin:0 0 10px;font-size:12px;letter-spacing:.12em;color:#8fb0ba;font-weight:600}
+input[type=password],select,textarea{width:100%;background:#061820;color:#eaffff;border:1px solid #1d4a5c;padding:10px 12px;border-radius:10px;font:inherit}
+textarea{height:110px;font-size:13px} select{width:auto;min-width:260px} .mono{font-family:Consolas,monospace;font-size:12px;height:220px}
+button{background:#0f5d78;color:#fff;border:0;border-radius:999px;padding:9px 20px;cursor:pointer;font:inherit}
+button:hover{background:#13799c} button.ghost{background:transparent;border:1px solid #1d4a5c;padding:6px 14px;font-size:13px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 0} .opt small,.tool small,p{color:#8fb0ba;display:block;margin-top:2px;font-size:13px}
+.tool{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-top:1px solid rgba(255,255,255,.06)} .tool:first-of-type{border-top:0}
+.badge{font-size:10px;border:1px solid #b7873a;color:#ffd27a;border-radius:6px;padding:1px 6px;margin-left:6px}
+#status{color:#7fe0a0;margin-left:12px} p{margin:8px 0 0}
+</style></head>
+<body><div class="wrap">
+<h1><b>Jarvis</b> settings</h1>
+
+<section><h2>GROQ API KEY</h2>
+<input id="apiKey" type="password" placeholder="gsk_...">
+<p>Stored only in this browser's extension storage and sent only to Groq. Never synced.</p></section>
+
+<section><h2>PRIVACY</h2>
+<label class="opt"><input type="radio" name="privacy" value="strict"><div><b>Strict (recommended)</b>
+<small>Jarvis never sees your tabs, history, bookmarks or pages. Tab tools work from the words you say and act locally; the model only gets counts and "done" results.</small></div></label>
+<label class="opt"><input type="radio" name="privacy" value="balanced"><div><b>Balanced</b>
+<small>Also lets Jarvis see tab titles and sites, and read history, bookmarks or a page's text, but only after you approve each request. Private sites stay hidden.</small></div></label>
+<p>In both modes: Jarvis has no screenshot or screen-reading ability, and emails, phone numbers, cards, IDs, keys and passwords you type are swapped for placeholders before leaving your browser. Voice audio goes to Groq only while you hold the mic open.</p></section>
+
+<section><h2>PRESENCE (ON EVERY TAB)</h2>
+<label class="opt"><input type="checkbox" id="presence"><div>Show the floating Jarvis orb on web pages<small>Shortcut: Alt+J (change at chrome://extensions/shortcuts). The orb never reads the page.</small></div></label>
+<label class="opt"><input type="checkbox" id="hideOnPrivate"><div>Hide on private sites<small>Banking, email, messaging, health, password managers, login and checkout pages.</small></div></label>
+<label class="opt"><input type="checkbox" id="nudges"><div>Occasional nudges<small>Local only, based on tab count and timers (for example "you have 25+ tabs open"). At most one every few hours.</small></div></label>
+<h2 style="margin-top:14px">EXTRA PRIVATE SITES (ONE PER LINE)</h2><textarea id="privateSites" placeholder="example.com"></textarea>
+<p id="builtin"></p>
+<h2 style="margin-top:14px">SITES WHERE JARVIS IS HIDDEN (ONE PER LINE)</h2><textarea id="hiddenSites"></textarea></section>
+
+<section><h2>MODEL (needs tool calling support)</h2>
+<select id="model"></select> <button id="refresh" type="button" class="ghost">Load models from Groq</button></section>
+
+<section><h2>PERSONALITY</h2><textarea id="systemPrompt"></textarea>
+<p>The privacy rules are always added and can't be edited here. <button id="resetPrompt" type="button" class="ghost">Reset to default</button></p>
+<label class="opt" style="margin-top:8px"><input type="checkbox" id="speak"><div>Speak replies aloud</div></label></section>
+
+<section><h2>TOOLS</h2><div id="tools"></div></section>
+
+<section><h2>WHAT JARVIS LAST SENT TO GROQ (THIS BROWSER SESSION)</h2>
+<textarea id="last" class="mono" readonly></textarea>
+<p><button id="reloadLast" type="button" class="ghost">Refresh</button> This is the exact, already-scrubbed request. It is kept in memory only and cleared when the browser closes.</p></section>
+
+<button id="save">Save</button><span id="status"></span>
+</div><script src="options.js" type="module"></script></body></html>

@@ -1,0 +1,72 @@
+{
+  "manifest_version": 3,
+  "name": "Jarvis New Tab",
+  "version": "0.4.0",
+  "description": "Replaces the new tab page with Jarvis, a voice and text assistant that can control Chrome.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "tabGroups",
+    "bookmarks",
+    "history",
+    "sessions",
+    "scripting",
+    "alarms",
+    "notifications",
+    "system.cpu",
+    "system.memory",
+    "topSites",
+    "favicon",
+    "search",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://api.groq.com/*",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "panel.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-jarvis": {
+      "suggested_key": {
+        "default": "Alt+J"
+      },
+      "description": "Show or hide Jarvis"
+    }
+  },
+  "action": {
+    "default_title": "Jarvis (Alt+J)"
+  }
+}

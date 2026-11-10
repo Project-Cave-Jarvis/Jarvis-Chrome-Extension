@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Jarvis</title><link rel="stylesheet" href="panel.css"></head>
+<body>
+<header>
+  <canvas id="mini"></canvas>
+  <div class="ttl"><b>Jarvis</b><span id="st">Online</span></div>
+  <button id="new" title="New conversation">+</button>
+  <button id="hide" title="Hide Jarvis on this site">&#8856;</button>
+  <button id="close" title="Close (Esc)">&times;</button>
+</header>
+<div id="log"></div>
+<div id="chips">
+  <button data-p="Group my open tabs by site. Don't close anything.">Tidy tabs</button>
+  <button data-p="Start a 25 minute focus timer.">Focus 25</button>
+  <button data-p="What's open right now?">What's open?</button>
+</div>
+<div class="bar">
+  <input id="cmd" placeholder="Ask Jarvis..." autocomplete="off">
+  <button id="mic" title="Voice"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11z"/></svg></button>
+</div>
+<button id="priv"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg><span id="privText"></span></button>
+<script type="module" src="panel.js"></script>
+</body></html>
